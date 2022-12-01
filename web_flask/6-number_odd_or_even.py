@@ -79,12 +79,17 @@ def number_template(n):
     if type(n) is int:
         return render_template('5-number.html', n=(n))
 
+
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def number_odd_or_even(n):
     """
+    The function returns the message we
+    want to display in the user’s browser
+    if input is c_fun return in display:
+    show number type int read file html
+    use render_template whit if and else in jinja.
     """
     return (render_template('6-number_odd_or_even.html', n=n))
-
 
 
 if __name__ == "__main__":
