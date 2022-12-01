@@ -69,6 +69,3 @@ class FileStorage:
         the JSON file to objects
         """
         self.reload()
-
-
-
