@@ -92,5 +92,4 @@ class DBStorage:
         """
             Closing the session
         """
-        self.remove()
-        self.__session.close()
+        self.__session.remove()
