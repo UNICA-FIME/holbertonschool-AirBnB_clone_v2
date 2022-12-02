@@ -17,6 +17,8 @@ from os import getenv
 
 all_classes = {"User": User, "State": State, "City": City, "Amenity": Amenity,
                "Place": Place, "Review": Review}
+
+
 class DBStorage:
     """
         This class manage DB storage for AirBnb
