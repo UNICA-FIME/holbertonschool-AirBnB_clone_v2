@@ -13,11 +13,9 @@ class FileStorage:
         if cls is None:
             return FileStorage.__objects
         new_dict = {}
-        name_class = cls.__name__
-        key = FileStorage.__objects.keys()
-        for i in key:
-            if name_class == i.split(".")[0]:
-                new_dict[i] = FileStorage.__objects[i]
+        for key, value in FileStorage.__objects.items():
+            if cls == value.__class__:
+                new_dict[key] = value
         return new_dict
 
     def new(self, obj):
@@ -31,7 +29,7 @@ class FileStorage:
             temp.update(FileStorage.__objects)
             for key, val in temp.items():
                 temp[key] = val.to_dict()
-            json.dump(temp, f)
+            json.dump(temp, f, sort_keys=True, indent=4)
 
     def reload(self):
         """Loads storage dictionary from file"""
