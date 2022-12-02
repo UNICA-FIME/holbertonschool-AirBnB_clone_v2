@@ -15,7 +15,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from os import getenv
 
-
+all_classes = {"User": User, "State": State, "City": City, "Amenity": Amenity,
+               "Place": Place, "Review": Review}
 class DBStorage:
     """
         This class manage DB storage for AirBnb
@@ -23,7 +24,6 @@ class DBStorage:
     """
     __engine = None
     __session = None
-    all_classes = ["State", "City", "User", "Place", "Review"]
 
     def __init__(self):
         """
@@ -49,13 +49,14 @@ class DBStorage:
         all objects depending of the class name"""
         d = {}
         if cls is None:
-            for c in self.all_classes:
-                c = eval(c)
-                for instance in self.__session.query(c).all():
+            for c in all_classes.values():
+                result = self.__session.query(c).all()
+                for instance in result:
                     key = instance.__class__.__name__ + '.' + instance.id
                     d[key] = instance
         else:
-            for instance in self.__session.query(cls).all():
+            result = self.__session.query(cls).all()
+            for instance in result:
                 key = instance.__class__.__name__ + '.' + instance.id
                 d[key] = instance
         return d
