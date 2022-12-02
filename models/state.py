@@ -6,14 +6,14 @@ from sqlalchemy.orm import relationship
 from models.city import City
 import models
 
-
-class State(BaseModel, Base):
-    """ State class """
-    if models.storage_type == 'db':
+if models.storage_type == 'db':
+    class State(BaseModel, Base):
+        """ State class """
         __tablename__ = "states"
         name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="states", cascade="all")
-    else:
+        cities = relationship("City", backref="state", cascade="all")
+else:
+    class State(BaseModel):
         name = ""
 
         @property
